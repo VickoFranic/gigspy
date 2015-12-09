@@ -1,0 +1,44 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext);
+html,
+body {
+  padding-top: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+div,
+p,
+legend,
+blockquote {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+/******** Index page ***********/
+
+#headerlogo {
+  color: #b2c831;
+}
+
+.register-info-wraper {
+  border-radius: 15px;
+}
+
+#register-info {
+  padding: 10px !important;
+}
+
+#register-info h2 {
+  margin-left: 20px;
+}
+
+#register-info img {
+  margin: 0 auto;
+}
+
+#register-form .footer {
+  padding-left: 20px;
+  padding-right: 20px;
+}
