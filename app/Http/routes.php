@@ -2,49 +2,38 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Guest Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
 */
-
-
-/* ODRADITI U ADMIN CONTROLLER */
-Route::get('/admin', function() {
-	return view('login');
-});
-
-Route::post('/admin', function() {
-
-	if (Auth::attempt([
-		'email' => Input::get('email'),
-		'password' => Input::get('password'),
-		'role_id'  => 1
-		]))
-		return redirect('/admin/vice');
-
-		Session::flash('message', 'Unešeni podaci nisu ispravni.');
-		return back();
-});
-/* ODRADITI U ADMIN CONTROLLER */
-
-
-Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
-	Route::get('/vice', function() {
-		return "VICE";
-	});
-});
-
 Route::get('/', 'IndexController@index');
 Route::get('/callback', 'IndexController@getUserFromRedirect');
+Route::get('/admin', 'AdminAreaController@showLoginForm');
+Route::post('/admin', 'AdminAreaController@loginRequest');
 
+
+/*
+|--------------------------------------------------------------------------
+| Administrator Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['middleware' => 'admin'], function() {
+
+	Route::get('/admin/dashboard', 'AdminAreaController@AdminDashboard');
+	Route::get('/admin/users', 'AdminAreaController@usersTable');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| User Routes
+|--------------------------------------------------------------------------
+*/
 Route::group(['middleware' => 'auth'], function() {
+
 	Route::get('/welcome', 'IndexController@showWelcome');
+	Route::get('/logout', 'IndexController@logoutUser');
+
 	Route::get('/dashboard', function() {
-		Auth::logout();
 		abort(503);
 	});
 });

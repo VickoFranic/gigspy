@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -20,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('avatar');
             $table->string('email')->unique();
             $table->string('location');
+            $table->integer('old')->default(0);
+            $table->timestamp('last_login')->default(Carbon::now('Europe/Zagreb'));
             $table->string('password', 60);
             $table->rememberToken();
             $table->timestamps();

@@ -7,6 +7,7 @@ use Session;
 use Facebook;
 use App\User;
 use Validator;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,7 @@ class IndexController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         if (Auth::user()) {
             return redirect('/welcome');
         }
@@ -46,12 +47,16 @@ class IndexController extends Controller
         
         try {
             $user = $this->facebook
-                         ->get('/me?fields=id,name,picture.width(149).height(149),email,location', $token)
+                         ->get('/me?fields=id,name,picture.width(140).height(140),email,location', $token)
                          ->getGraphUser()->asArray();
 
             if ($userDB = User::where('facebook_id', $user['id'])->first()) {
-                Auth::loginUsingId($userDB['id'], true);
-                Session::put('old', true);
+                if ($userDB->old == 0) {
+                    $userDB->update(['old' => 1]);
+                    $userDB->save();
+                }
+
+                Auth::loginUsingId($userDB['id']);
                 return redirect('/welcome');
             }
 
@@ -87,6 +92,7 @@ class IndexController extends Controller
         $new->facebook_id = $user['id'];
         $new->name = $user['name'];
         $new->avatar = $user['picture']['url'];
+        $new->last_login = Carbon::now();
 
         if (!isset($user['email']))
             $new->email = 'No Email';
@@ -115,7 +121,7 @@ class IndexController extends Controller
             abort(500);
         }
 
-        Auth::loginUsingId($userDB['id'], true);
+        Auth::loginUsingId($userDB['id']);
     }
 
     /**
@@ -126,5 +132,19 @@ class IndexController extends Controller
     {
         $user = Auth::user();
         return view('index')->with('user', $user);
+    }
+
+    /**
+     * Logout user
+     *
+     */
+    public function logoutUser() 
+    {   
+        $userDB = User::find(Auth::user()->id);
+        $userDB->update(['last_login' => Carbon::now()->toDayDateTimeString()]);
+        $userDB->save();
+
+        Auth::logout();
+        return redirect('/');
     }
 }
