@@ -1,0 +1,40 @@
+$maincolor: #b2c831;
+
+$secondarycolor: #bdbdbd;
+
+/******** Dashboard page ***********/
+#dashboard {
+	padding-top: 30px;
+	
+	.dash-unit a.btn {
+		margin: 0 auto;
+	}
+
+	.fa {
+		color: $secondarycolor;
+		font-size: 25px;
+	}
+
+	.fa-ul li {
+		padding-top: 8px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.first_column {
+		width: 48.7%;
+		float: left;
+	}
+
+	.second_column {
+		width: 48.6%;
+		float: right;
+	}
+
+	@media (max-width: 768px) {
+		.first_column, .second_column {
+			clear: both;
+			width: 100%;
+		}
+	}
+}

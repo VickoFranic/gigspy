@@ -46,4 +46,12 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->role_id;
     }
+
+    /**
+     * Get all user pages
+     */
+    public function pages()
+    {
+        return $this->hasMany('App\Page');
+    }
 }

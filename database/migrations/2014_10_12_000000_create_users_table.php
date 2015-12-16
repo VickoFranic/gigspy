@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('location');
             $table->integer('old')->default(0);
-            $table->timestamp('last_login')->default(Carbon::now('Europe/Zagreb'));
+            $table->string('last_login')->default(Carbon::now('Europe/Zagreb'));
             $table->string('password', 60);
             $table->rememberToken();
             $table->timestamps();

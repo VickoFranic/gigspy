@@ -4,21 +4,20 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Session;
-use Facebook;
 use App\User;
 use Validator;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Helpers\FacebookHelper;
+use Facebook\GraphNodes\GraphUser;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {
     protected $facebook;
 
-
-    public function __construct(Facebook $facebook)
-    {
+    public function __construct(FacebookHelper $facebook) {
         $this->facebook = $facebook;
     }
 
@@ -27,101 +26,38 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexPage()
     {   
         if (Auth::user()) {
             return redirect('/welcome');
         }
-
-        $url = $this->facebook->getLoginUrl(['user_location']);
+        $url = $this->facebook->generateLoginUrl();
         return view('index')->with('url', $url);
     }
 
     /**
-     * Get Access token from Facebook Redirect, call Facebook API. Redirect to welcome if Authenticated, else create User
-     * @return Redirect | Exception 
+     * Get Facebook user from callback and make login or create user
+     *
+     * @return Response | Exception 
      */
-    public function getUserFromRedirect()
-    {
-        $token = $this->getAccessToken();
-        
-        try {
-            $user = $this->facebook
-                         ->get('/me?fields=id,name,picture.width(140).height(140),email,location', $token)
-                         ->getGraphUser()->asArray();
+    public function loginViaFacebook()
+    {   
+        $userFB = $this->facebook->getUserFromRedirect();
+        $userDB = User::where('facebook_id', $userFB->getId())->first();
 
-            if ($userDB = User::where('facebook_id', $user['id'])->first()) {
-                if ($userDB->old == 0) {
-                    $userDB->update(['old' => 1]);
-                    $userDB->save();
-                }
-
-                Auth::loginUsingId($userDB['id']);
-                return redirect('/welcome');
+        if (! is_null($userDB)) {
+            // User already exists, check "first time visit" state (old)
+            if ($userDB->old == 0) {
+                $userDB->update(['old' => 1]);
+                $userDB->save();
             }
-
-            $this->createUser($user);
-                return redirect('/welcome');
-
-        } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            abort(500);
+            //Authenticate user
+            Auth::loginUsingId($userDB->id);
+            return redirect('/welcome');
         }
-    }
-
-    protected function getAccessToken()
-    {
-        try {
-            $token = $this->facebook->getAccessTokenFromRedirect();
-            return $token;
-        } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            abort(500);
-        }
-    }
-
-    /**
-     * Build new User Model from array
-     *
-     * @param @array
-     *
-     * @return App\User
-     */
-    public function buildUserFromArray(array $user)
-    {
-        $new = new User;
-
-        $new->facebook_id = $user['id'];
-        $new->name = $user['name'];
-        $new->avatar = $user['picture']['url'];
-        $new->last_login = Carbon::now();
-
-        if (!isset($user['email']))
-            $new->email = 'No Email';
-        else
-            $new->email = $user['email'];
-
-        if (!isset($user['location']))
-            $new->location = 'No location';
-        else
-            $new->location = $user['location']['name'];
-        
-        return $new;
-    }
-
-    /**
-     * Save user to database
-     *
-     * @param array $user
-     */
-    protected function createUser(array $user)
-    {
-        $new = $this->buildUserFromArray($user);
-        $userDB = User::create($new->toArray());
-
-        if (! $userDB->id) {
-            abort(500);
-        }
-
-        Auth::loginUsingId($userDB['id']);
+        // User not found in database, create it
+        $this->createAndLoginUser($userFB);
+        return redirect('/welcome');
     }
 
     /**
@@ -146,5 +82,53 @@ class IndexController extends Controller
 
         Auth::logout();
         return redirect('/');
+    }
+
+
+    /***** HELPER FUNCTIONS *****/
+
+    /**
+     * Save user to database
+     *
+     * @param array $user
+     */
+    protected function createAndLoginUser(GraphUser $user)
+    {
+        $new = $this->validateUserData($user);
+        $userDB = User::create($new->toArray());
+
+        if (! $userDB->id) {
+            abort(500);
+        }
+        Auth::loginUsingId($userDB->id);
+    }
+
+    /**
+     * Build new User Model from Facebook GraphUser object
+     *
+     * @param GraphUser $user
+     *
+     * @return App\User $new
+     */
+    protected function validateUserData(GraphUser $user)
+    {
+        $new = new User;
+
+        $new->facebook_id = $user->getId();
+        $new->name = $user->getName();
+        $new->avatar = $user->getPicture()->getUrl();
+        $new->last_login = Carbon::now()->toDayDateTimeString();
+
+        if (is_null($user->getEmail()))
+            $new->email = 'No Email';
+        else
+            $new->email = $user->getEmail();
+
+        if (is_null($user->getLocation()))
+            $new->location = 'No location';
+        else
+            $new->location = $user->getLocation()->getName();
+        
+        return $new;
     }
 }

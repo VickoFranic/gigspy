@@ -33,13 +33,13 @@
 		<form id="register-form" class="form" action="{{ url('/dashboard') }}">
 			<legend>
 				@if ($user->old == 1)
-				Welcome back, {{ $user->name }}.
-				<br><br>We hope you enjoy using GigSpy.<br>
+				Welcome back, {{ $user->name }}.<br>
+				<br>We hope you enjoy using GigSpy.<br>
 				@else
 				Welcome, {{ $user->name }}.
 				<br><br>Have a great time using GigSpy, you will love it !
 				@endif
-				<br><br>
+				<br>
 			</legend>
 			<div class="footer">
 				<button type="submit" class="btn btn-success">Continue</button>

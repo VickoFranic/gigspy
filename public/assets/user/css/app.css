@@ -1,10 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext);
-html,
-body {
-  padding-top: 15px;
-  overflow-x: hidden;
-}
-
 h1,
 h2,
 h3,
@@ -23,7 +17,12 @@ fieldset {
 
 /******** Index page ***********/
 
-#preloader {
+#index {
+  padding-top: 15px;
+  overflow-x: hidden;
+}
+
+#index #preloader {
   position: fixed;
   left: 0;
   top: 0;
@@ -34,35 +33,73 @@ fieldset {
   background: #333 url("../img/loading.gif") no-repeat center center;
 }
 
-#headerlogo {
+#index #headerlogo {
   color: #b2c831;
 }
 
-.register-info-wraper {
+#index .register-info-wraper {
   border-radius: 15px;
 }
 
-#register-info {
+#index #register-info {
   padding: 10px !important;
 }
 
-#register-info h2 {
+#index #register-info h2 {
   margin-left: 20px;
 }
 
-#register-info img {
+#index #register-info img {
   margin: 0 auto;
 }
 
-#register-info .thumbnail {
+#index #register-info .thumbnail {
   padding: 0px;
 }
 
-#register-form .footer {
+#index #register-form .footer {
   padding-left: 20px;
   padding-right: 20px;
 }
 
-#footerwrap {
+#index #footerwrap {
   margin-top: 10px;
+}
+/******** Dashboard page ***********/
+
+#dashboard {
+  padding-top: 30px;
+}
+
+#dashboard .dash-unit a.btn {
+  margin: 0 auto;
+}
+
+#dashboard .fa {
+  color: #bdbdbd;
+  font-size: 25px;
+}
+
+#dashboard .fa-ul li {
+  padding-top: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#dashboard .first_column {
+  width: 48.7%;
+  float: left;
+}
+
+#dashboard .second_column {
+  width: 48.6%;
+  float: right;
+}
+
+@media (max-width: 768px) {
+  #dashboard .first_column,
+  #dashboard .second_column {
+    clear: both;
+    width: 100%;
+  }
 }

@@ -16,7 +16,7 @@
 			</legend>
 			<br>
 			<div class="footer">
-				<a href="{{ $url }}" class="btn btn-info">Login with Facebook</a>
+				<a id="login" href="{{ $url }}" class="btn btn-info">Login with Facebook</a>
 			</div>
 			<br>
 			<label class="checkbox inline">GigSpy uses Facebook integration for data management</label>

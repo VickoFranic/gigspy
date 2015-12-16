@@ -5,22 +5,10 @@
 | Guest Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', 'IndexController@index');
-Route::get('/callback', 'IndexController@getUserFromRedirect');
-Route::get('/admin', 'AdminAreaController@showLoginForm');
-Route::post('/admin', 'AdminAreaController@loginRequest');
-
-
-/*
-|--------------------------------------------------------------------------
-| Administrator Routes
-|--------------------------------------------------------------------------
-*/
-Route::group(['middleware' => 'admin'], function() {
-
-	Route::get('/admin/dashboard', 'AdminAreaController@AdminDashboard');
-	Route::get('/admin/users', 'AdminAreaController@usersTable');
-});
+Route::get('/', 'IndexController@indexPage');
+Route::get('/userData', 'IndexController@loginViaFacebook');
+Route::get('/admin', 'AdminController@showLoginForm');
+Route::post('/admin', 'AdminController@loginRequest');
 
 
 /*
@@ -32,8 +20,19 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('/welcome', 'IndexController@showWelcome');
 	Route::get('/logout', 'IndexController@logoutUser');
+	Route::get('/dashboard', 'UserController@userDashboard');
+	Route::get('/pages', 'PageController@savePages');
+	Route::get('/pageData/{page_id}', 'PageController@pageData');
+});
 
-	Route::get('/dashboard', function() {
-		abort(503);
-	});
+
+/*
+|--------------------------------------------------------------------------
+| Administrator Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['middleware' => 'admin'], function() {
+
+	Route::get('/admin/dashboard', 'AdminController@adminDashboard');
+	Route::get('/admin/users', 'AdminController@usersTable');
 });

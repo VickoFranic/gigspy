@@ -1,4 +1,19 @@
-﻿/* COLOR REFERENCE
+﻿/*!
+ * BLOCKS - Responsive Dashboard Theme
+ *
+ * Hey! Thanks for download this theme!
+ * This bootstrap theme is totally free. You can edit, share, distribute, use and whatever you want.
+ * Credits are always appreciated.
+ * Please, feel free to contact me if you have any questions regarding this theme.
+ *
+ *
+ * Copyright 2013 
+ * Created by: Carlos Alvarez
+ * URL: http://Alvarez.is
+ * Designed and built based on Twitter Bootstrap.
+ */
+
+/* COLOR REFERENCE
 - #1f1f1f (Background Color)
 - #3d3d3d (Dash-unit and half-unit Section) 
 - #262626 (Footer) 
@@ -41,20 +56,11 @@ h5 {
 /*--- Dash Unit / Used in Dashboard page ---*/
 .dash-unit {		
 	margin-bottom: 30px;
-	padding-bottom:10px;
+	padding: 30px;
 	border: 1px solid #383737;
-	background-image:url('../img/sep-half.png');
 	background-color: #3d3d3d;
 	color:white;
-	height:290px;
-}
-
-.dash-unit:hover {
-	background-color: #4f4f4f;
-	-moz-box-shadow:    3px 3px 2px 0px #151515;
-    -webkit-box-shadow: 3px 3px 2px 0px #151515;
-    box-shadow:         3px 3px 2px 0px #151515;
-
+	min-height:290px;
 }
 
 .dash-unit dtitle {
@@ -88,9 +94,9 @@ h5 {
 
 .dash-unit h2 {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: bold;
-	font-size: 30px;
-	line-height: 26px;
+	font-weight: 300;
+	font-size: 20px;
+	line-height: 30px;
 	letter-spacing: 0px;
 	color: #ffffff;
 	padding-top:10px;
@@ -280,7 +286,7 @@ input[type=submit] {
           border-radius: 4px;
 
 }
-input[type=text], input[type=password], textarea {
+input[type=text], textarea {
 	background: #cdcbcc;
 	font-size: 13px;
 	display: block;
@@ -757,8 +763,8 @@ a:hover {
     width: 100%;
     background:#262626;
 	background-image:url('../img/sep-half.png');
-    padding-top:35px;
-    padding-bottom: 25px;
+    padding-top:25px;
+    padding-bottom: 40px;
 	border-top-style: solid;
     border-top-width:8px;
     border-top-color:#1d1d1d;
