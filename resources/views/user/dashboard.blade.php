@@ -53,7 +53,7 @@
 			<li><i class="fa-li fa fa-info"></i>{{ $activePage->band_members }}</li>
 			<li><i class="fa-li fa fa-users"></i>{{ $activePage->artists_we_like }}</li>
 			<li><i class="fa-li fa fa-phone"></i>{{ $activePage->booking_agent }}</li>
-			<li><i class="fa-li fa fa-home"></i><a href="{{ $activePage->website }}" target="_blank">{{ $activePage->website }}</a></li>
+			<li><i class="fa-li fa fa-home"></i>{{ $activePage->website }}</li>
 		</ul>
 	</div>
 </div>
