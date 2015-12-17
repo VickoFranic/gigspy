@@ -2,7 +2,7 @@
 
 Main purpose of this web app is helping musicians to easly maintain and update their band's Facebook pages, create eletronic press kit`s, communicate with other members etc. - still under active development.
 
-Live App [development version]: <a href="http://gigspy.vfdesign.org/" target="_blank">http://gigspy.vfdesign.org</a>
+Live App [development version]: <a href="http://gigspy.vfdesign.org/" target="_blank">gigspy.vfdesign.org</a>
 
 - App is built on Laravel 5.1 -
 
