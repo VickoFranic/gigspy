@@ -4,7 +4,7 @@ namespace App\Helpers;
 use App\Page;
 /**
  *
- * GigSpy custom Facebook API helper class
+ * GigSpy DB helper class
  *
  */
 class DatabaseHelper {
