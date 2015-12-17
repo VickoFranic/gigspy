@@ -12,6 +12,7 @@
 		</div><!-- /thumbnail -->
 		<h1>{{ $user->name }}</h1>
 		<h3>{{ $user->location }}</h3>
+		<a href="/logout" class="btn btn-primary">Logout</a>
 	</div>
 
 	<!-- USER BANDS BLOCK -->
@@ -21,7 +22,7 @@
 		@if (Session::get('no_data'))
 			<h2>{{ Session::get('no_data') }}</h2>
 		@elseif (! isset($pages))
-			<h2>You have no band(s) registered yet,<br> do you want to <a href="{{ Session::get('pagesUrl') }}" >add them to GigSpy ?</a></h2>
+			<h2>You have no band(s) registered yet,<br> do you want to <a id="fetch-bands" href="{{ Session::get('pagesUrl') }}" >add them to GigSpy ?</a></h2>
 		@else
 		@foreach($pages as $page)
 			<ul class="fa-ul">
@@ -48,6 +49,7 @@
 		<ul class="fa-ul">
 			<li><i class="fa-li fa fa-map-marker"></i>{{ $activePage->hometown }}</li>
 			<li><i class="fa-li fa fa-globe"></i>{{ $activePage->about }}</li>
+			<li><i class="fa-li fa fa-globe"></i>{{ $activePage->bio }}</li>
 			<li><i class="fa-li fa fa-info"></i>{{ $activePage->band_members }}</li>
 			<li><i class="fa-li fa fa-users"></i>{{ $activePage->artists_we_like }}</li>
 			<li><i class="fa-li fa fa-phone"></i>{{ $activePage->booking_agent }}</li>

@@ -18,6 +18,7 @@
     <!-- <script type="text/javascript" src="{{ asset('assets/user/js/dash-noty.js') }}"></script> This is a Noty bubble when you init the theme-->
 
 	<script src="{{ asset('assets/user/js/jquery.flexslider.js') }}" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ asset('assets/user/js/all.js') }}"></script>
 
     @include('helpers.preloaderEnd')
 

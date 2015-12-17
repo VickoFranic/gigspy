@@ -18,6 +18,7 @@ class AdminLoginRequest extends Request
     {
         $data = array('email'       => $this->input('email'),
                       'password'    => $this->input('password'),
+                      'role_id'     => 1
                       );
 
         if (Auth::attempt($data, true))

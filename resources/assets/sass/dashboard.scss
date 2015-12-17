@@ -5,6 +5,19 @@ $secondarycolor: #bdbdbd;
 /******** Dashboard page ***********/
 #dashboard {
 	padding-top: 30px;
+
+	.btn {
+	    padding: 10px 20px;
+		border-color: #333333;
+		background-color: #333333;
+		box-shadow: none;
+		font-weight: 500;
+		border-radius: 0px;
+	}
+
+	.btn:hover {
+    	background-color: #bdbdbd;
+	}
 	
 	.dash-unit a.btn {
 		margin: 0 auto;

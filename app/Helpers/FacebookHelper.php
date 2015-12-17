@@ -110,8 +110,8 @@ class FacebookHelper {
 
     	try {
     		$response = $this->facebook->getClient()->sendRequest($request);
-    	} catch (\Exception $e) {
-  			abort(505);
+    	} catch (Exception $e) {
+  			dd($e);
     	}
 
     	return $response->getGraphPage();

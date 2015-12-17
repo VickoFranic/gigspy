@@ -16,5 +16,5 @@ elixir.config.sourcemaps = false;
 elixir(function(mix) {
     mix.sass(['index.scss', 'dashboard.scss'], 'public/assets/user/css');
 
-    mix.scripts(['index.js'], 'public/assets/user/js');
+    mix.scripts(['index.js', 'dashboard.js'], 'public/assets/user/js');
 });

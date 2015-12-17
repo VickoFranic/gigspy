@@ -1,7 +1,6 @@
 <div id="left-side" class="col-lg-6">
 	<div class="register-info-wraper">
 		<div id="register-info">
-			<h2>Welcome to GigSpy !</h2>
 			<img src="assets/user/img/logo_big.png" class="img img-responsive"><br>
 		</div>
 	</div>

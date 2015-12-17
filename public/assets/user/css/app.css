@@ -18,8 +18,22 @@ fieldset {
 /******** Index page ***********/
 
 #index {
-  padding-top: 15px;
+  position: relative;
   overflow-x: hidden;
+  padding-bottom: 0 !important;
+}
+
+#index #wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 5%);
+  transform: translate(-50%, 5%);
+}
+
+#index #left-side {
+  border-right: 1px dashed #b2c831;
+  padding-right: 100px;
 }
 
 #index #preloader {
@@ -62,13 +76,41 @@ fieldset {
   padding-right: 20px;
 }
 
+#index #register-form .footer h5 {
+  color: white;
+}
+
 #index #footerwrap {
   margin-top: 10px;
+}
+
+@media (max-width: 1200px) {
+  #index #left-side {
+    border-right: none;
+    padding-right: 0px;
+  }
+
+  #index #right-side {
+    background-color: #3d3d3d;
+  }
 }
 /******** Dashboard page ***********/
 
 #dashboard {
   padding-top: 30px;
+}
+
+#dashboard .btn {
+  padding: 10px 20px;
+  border-color: #333333;
+  background-color: #333333;
+  box-shadow: none;
+  font-weight: 500;
+  border-radius: 0px;
+}
+
+#dashboard .btn:hover {
+  background-color: #bdbdbd;
 }
 
 #dashboard .dash-unit a.btn {

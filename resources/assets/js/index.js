@@ -1,3 +1,3 @@
 $('#login').click(function() {
-	$(this).replaceWith("<h4 class='animated infinite rubberBand'>Working, please wait...</h4>");
+	$(this).replaceWith("<h5 class='animated infinite rubberBand'>Working, please wait...</h5>");
 });

@@ -20,7 +20,7 @@ class AdminController extends Controller
         if (Auth::user()) {
             return redirect('/admin/dashboard');
         }
-
+        
         return view('index.login');
     }
 
