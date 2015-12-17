@@ -90,6 +90,10 @@ fieldset {
     padding-right: 0px;
   }
 
+  #index #register-form .btn {
+    font-size: 1em;
+  }
+
   #index #right-side {
     background-color: #3d3d3d;
   }
